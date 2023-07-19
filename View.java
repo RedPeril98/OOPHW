@@ -1,11 +1,13 @@
 import AllAvengers.Avengers;
 
+import java.util.Collections;
+
 public class View {
     private static int step = 1;
     private static final int[] l = {0};
-    private static final String top10 = formatDiv("a") + String.join("", Avengers.nCopies(9, formatDiv("-b"))) + formatDiv("-c");
-    private static final String midl10 = formatDiv("d") + String.join("", Avengers.nCopies(9, formatDiv("-e"))) + formatDiv("-f");
-    private static final String bottom10 = formatDiv("g") + String.join("", Avengers.nCopies(9, formatDiv("-h"))) + formatDiv("-i");
+    private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("-b"))) + formatDiv("-c");
+    private static final String midl10 = formatDiv("d") + String.join("", Collections.nCopies(9, formatDiv("-e"))) + formatDiv("-f");
+    private static final String bottom10 = formatDiv("g") + String.join("", Collections.nCopies(9, formatDiv("-h"))) + formatDiv("-i");
     private static void tabSetter(int cnt, int max){
         int dif = max - cnt + 2;
         if (dif>0) System.out.printf("%" + dif + "s", ":\t"); else System.out.print(":\t");
@@ -25,8 +27,8 @@ public class View {
     private static String getChar(int x, int y){
         String out = "| ";
         for (Avengers human: Main.allTeam) {
-            if (human.getCoords()[0] == x && human.getCoords()[1] == y){
-                if (human.getHp() == 0) {
+            if (human.getCoords().get(0) == x && human.getCoords().get(1) == y){
+                if (!human.isAlive) {
                     out = "|" + (AnsiColors.ANSI_RED + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
